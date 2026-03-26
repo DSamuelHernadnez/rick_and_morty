@@ -1,38 +1,101 @@
-.App {
-  text-align: center;
+
+:root {
+  /* Paleta Base */
+  --bg-deep: #050506;          /* Negro casi total */
+  --bg-card: #0d0d10;          /* Gris carbón robótico */
+  
+  /* Colores de Energía */
+  --electric-blue: #00f2ff;    /* Cian/Azul Eléctrico */
+  --robot-red: #ff003c;        /* Rojo de advertencia/láser */
+  --glow-blue: rgba(0, 242, 255, 0.3);
+  --glow-red: rgba(255, 0, 60, 0.3);
+  
+  /* Tipografía */
+  --font-main: 'Orbitron', 'Inter', sans-serif; /* Tipografía futurista sugerida */
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: var(--bg-deep);
+  color: #e0e0e0;
+  margin: 0;
+  font-family: var(--font-main);
+  /* Textura de rejilla sutil de fondo */
+  background-image: 
+    linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+.main-container {
+  border: 1px solid rgba(0, 242, 255, 0.1);
+  background: var(--bg-card);
+  position: relative;
+  clip-path: polygon(0% 15px, 15px 0%, 100% 0%, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0% 100%);
+  padding: 20px;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Decoración de esquina robótica */
+.main-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 2px;
+  background: var(--electric-blue);
+  box-shadow: 0 0 10px var(--electric-blue);
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.btn-cyber {
+  background: transparent;
+  border: 1px solid var(--electric-blue);
+  color: var(--electric-blue);
+  padding: 10px 25px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: bold;
+  position: relative;
+  transition: all 0.3s;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.btn-cyber:hover {
+  background: var(--electric-blue);
+  color: black;
+  box-shadow: 0 0 20px var(--electric-blue);
+}
+
+.btn-danger {
+  border-color: var(--robot-red);
+  color: var(--robot-red);
+}
+
+.btn-danger:hover {
+  background: var(--robot-red);
   color: white;
+  box-shadow: 0 0 20px var(--robot-red);
 }
 
-.App-link {
-  color: #61dafb;
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.scan-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.scan-effect::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(0, 242, 255, 0.5);
+  box-shadow: 0 0 15px var(--electric-blue);
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
 }

@@ -1,0 +1,86 @@
+/* .bar{
+display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  padding: 1px;
+} */
+
+.bar {
+    display: flex;
+    align-items: center;
+    gap: 0; /* Unimos el input y el botón para un look de pieza única */
+    background: rgba(10, 10, 12, 0.95);
+    padding: 4px;
+    border: 1px solid var(--electric-blue, #00f2ff);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
+    
+    /* Corte robótico en las esquinas opuestas */
+    clip-path: polygon(0 0, 97% 0, 100% 25%, 100% 100%, 3% 100%, 0 75%);
+    
+    transition: all 0.3s ease;
+    width: fit-content;
+    margin: 20px auto;
+}
+
+/* Efecto de "activación" cuando el usuario hace clic */
+.bar:focus-within {
+    box-shadow: 0 0 25px rgba(0, 242, 255, 0.4);
+    border-color: #00f2ff;
+    transform: scale(1.02);
+}
+
+.searchInput {
+    background: transparent;
+    border: none;
+    padding: 12px 20px;
+    color: #fff;
+    font-family: 'Orbitron', sans-serif; /* Estilo futurista */
+    outline: none;
+    width: 250px;
+    letter-spacing: 2px;
+    font-size: 0.9rem;
+}
+
+.searchInput::placeholder {
+    color: rgba(0, 242, 255, 0.3);
+    font-size: 0.75rem;
+}
+
+.searchButton {
+    background: #ff003c; /* Rojo Eléctrico / Advertencia */
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    cursor: pointer;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    
+    /* Inclinación para el botón */
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.searchButton:hover {
+    background: #e90909;
+    box-shadow: -5px 0 15px rgba(233, 9, 9, 0.5);
+    padding-left: 35px; /* Efecto de expansión al hover */
+}
+
+/* Detalle extra: Una pequeña luz de "status" */
+.bar::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #00f2ff;
+    border-radius: 50%;
+    margin-left: 15px;
+    box-shadow: 0 0 10px #00f2ff;
+    animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
