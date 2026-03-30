@@ -1,0 +1,219 @@
+container {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   min-height: 90vh; /* Ocupa casi todo el alto de la pantalla */
+   padding: 40px;
+   background: radial-gradient(circle at center, #1a1a1d 0%, #0d0d10 100%);
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   position: relative;
+   overflow: hidden;
+}
+
+/* Efecto de líneas de escaneo sutiles de fondo (Opcional, muy ciberpunk) */
+.container::before {
+   content: "";
+   position: absolute;
+   inset: 0;
+   background: linear-gradient(rgba(18, 18, 18, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+   background-size: 100% 4px;
+   z-index: 0;
+   pointer-events: none;
+   opacity: 0.15;
+}
+
+/* --- Botón Volver (Estilo Octágono Rojo de la Card) --- */
+.backBtn {
+   position: absolute;
+   top: 30px;
+   left: 30px;
+   background: #ff003c; /* Rojo Láser */
+   color: white;
+   border: none;
+   padding: 10px 20px;
+   cursor: pointer;
+   font-weight: bold;
+   text-transform: uppercase;
+   letter-spacing: 2px;
+   z-index: 10;
+   /* Usamos el mismo clip-path octogonal de tu closeBtn */
+   clip-path: polygon(10% 0%, 90% 0%, 100% 15%, 100% 85%, 90% 100%, 10% 100%, 0% 85%, 0% 15%);
+   transition: all 0.3s ease;
+   box-shadow: 0 0 10px rgba(255, 0, 60, 0.5);
+}
+
+.backBtn:hover {
+   background: #e90909;
+   transform: scale(1.05);
+   box-shadow: 0 0 20px rgba(255, 0, 60, 0.8);
+}
+
+/* ============================================================
+   EL PANEL DE DETALLE (La "Super Card")
+   ============================================================ */
+.detailPanel {
+   display: flex;
+   flex-direction: row; /* Imagen a la izquierda, info a la derecha */
+   background: #0a0a0b; /* Mismo negro profundo */
+   width: 90%;
+   max-width: 1000px; /* Panel ancho y majestuoso */
+   min-height: 500px;
+   border-radius: 20px;
+   position: relative; /* CRUCIAL para el rayo */
+   overflow: hidden; /* Mantiene el rayo dentro */
+   z-index: 1;
+   
+   /* Entrada suave animada */
+   animation: panelFadeIn 0.6s ease-out forwards;
+   box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+}
+
+/* --- ADAPTACIÓN DEL RAYO ELÉCTRICO GIRATORIO --- */
+/* (Misma técnica que la Card, pero ajustada a este tamaño) */
+
+.detailPanel::before {
+   content: '';
+   position: absolute;
+   top: -150%; /* Más grande para cubrir el panel ancho */
+   left: -150%;
+   width: 400%;
+   height: 400%;
+   
+   /* Mismo degradado Cónico: Azul Eléctrico y Rojo Láser */
+   background: conic-gradient(
+       transparent, 
+       #00f2ff, /* Azul Eléctrico */
+       #ff003c, /* Rojo Láser */
+       transparent 20% /* Rayo más fino y definido para este tamaño */
+   );
+   
+   /* Rotación un poco más lenta para que sea elegante (6s) */
+   animation: rotate-electric 6s linear infinite;
+   z-index: -2; 
+}
+
+/* Capa interna que oculta el centro del rayo */
+.detailPanel::after {
+   content: '';
+   position: absolute;
+   /* Grosor del borde un poco mayor (4px) */
+   inset: 4px; 
+   background: #0d0d10; /* Color interno */
+   border-radius: 17px; /* Siguiendo la curva externa */
+   z-index: -1; 
+}
+
+/* ============================================================
+   SECCIÓN IZQUIERDA: LA IMAGEN (PROTAGONISTA)
+   ============================================================ */
+.imageSection {
+   flex: 1; /* Ocupa la mitad del panel */
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 4px; /* Pequeño espacio para que el borde se vea */
+   border-right: 2px solid #333; /* Separación sutil */
+   background: #000; /* Fondo negro puro para la imagen */
+}
+
+.image {
+   width: 100%;
+   height: 100%;
+   object-fit: cover; /* Imagen grande y sin deformar */
+   /* No necesita border-radius aquí, llena su sección */
+   filter: brightness(0.9) contrast(1.1);
+   transition: filter 0.5s ease;
+}
+
+.detailPanel:hover .image {
+   filter: brightness(1.1) contrast(1.2); /* Brillo intenso al hover */
+}
+
+/* ============================================================
+   SECCIÓN DERECHA: LA INFORMACIÓN (HOLOGRÁFICA)
+   ============================================================ */
+.infoSection {
+   flex: 1; /* Ocupa la otra mitad */
+   padding: 50px;
+   display: flex;
+   flex-direction: column;
+   color: white;
+   z-index: 2;
+}
+
+/* Título del Personaje (Mismo estilo que la Card, más grande) */
+.infoSection h1 {
+   margin: 0 0 30px 0;
+   font-size: 2.8rem;
+   color: #00f2ff; /* Azul Eléctrico */
+   text-transform: uppercase;
+   letter-spacing: 4px;
+   text-shadow: 0 0 15px rgba(0, 242, 255, 0.8);
+   border-bottom: 2px solid #ff003c; /* Subrayado Rojo Láser */
+   padding-bottom: 10px;
+}
+
+/* Contenedor de los datos fijos */
+.detailsData {
+   display: flex;
+   flex-direction: column;
+   gap: 15px;
+}
+
+/* Estilo de cada línea de datos (Pares Clave-Valor) */
+.dataLine {
+   display: flex;
+   align-items: center;
+   font-size: 1.1rem;
+   color: #e0e0e0;
+   background: rgba(255, 255, 255, 0.03); /* Fondo sutil de fila */
+   padding: 10px;
+   border-left: 3px solid transparent; /* Preparado para el hover */
+   transition: all 0.3s ease;
+}
+
+.dataLine:hover {
+   background: rgba(0, 242, 255, 0.05);
+   border-left: 3px solid #00f2ff; /* Resalta en Azul Eléctrico */
+   transform: translateX(5px);
+}
+
+/* La Etiqueta (ej: Status:) */
+.dataLabel {
+   color: #ff003c; /* Rojo Robótico para las etiquetas */
+   text-transform: uppercase;
+   letter-spacing: 1.5px;
+   font-weight: bold;
+   width: 120px; /* Ancho fijo para alinear los valores */
+   display: inline-block;
+}
+
+/* El Valor (ej: Alive) */
+.dataValue {
+   color: #fff;
+   font-weight: 300;
+   text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+}
+
+/* ============================================================
+   ANIMACIONES
+   ============================================================ */
+
+/* Reutilizamos tu animación de rotación */
+@keyframes rotate-electric {
+   from { transform: rotate(0deg); }
+   to { transform: rotate(360deg); }
+}
+
+/* Entrada del panel (Fade In + Scale) */
+@keyframes panelFadeIn {
+   from {
+       opacity: 0;
+       transform: scale(0.9) translateY(20px);
+   }
+   to {
+       opacity: 1;
+       transform: scale(1) translateY(0);
+   }
+}

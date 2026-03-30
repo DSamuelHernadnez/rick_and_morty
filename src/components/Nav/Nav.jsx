@@ -1,20 +1,36 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import SearchBar from '../SearchBar/SearchBar';
-import { Link } from "react-router-dom";
+import styles from './Nav.module.css';
 
-const Nav = (props) => {
-    return (
-      <nav>
-         <NavLink to="/home">
-            <button>Home</button>
-         </NavLink>
-         <NavLink to="/about">
-            <button>About</button>
-         </NavLink>
+const Nav = ({ onSearch, logout }) => {
+   return (
+      <nav className={styles.navContainer}>
+         {/* Grupo de enlaces con detección de ruta activa */}
+         <div className={styles.linksGroup}>
+            <NavLink 
+               to="/home" 
+               className={({ isActive }) => isActive ? styles.activeLink : ""}
+            >
+               <button className={styles.navBtn}>HOME</button>
+            </NavLink>
+
+            <NavLink 
+               to="/about" 
+               className={({ isActive }) => isActive ? styles.activeLink : ""}
+            >
+               <button className={styles.navBtn}>ABOUT</button>
+            </NavLink>
+         </div>
          
-         <SearchBar onSearch={props.onSearch} />
+         <div className={styles.searchWrapper}>
+            <SearchBar onSearch={onSearch} />
+         </div>
+         <button className={styles.logoutBtn} onClick={logout}>
+            EXIT_SYSTEM
+         </button>
       </nav>
-    );
-}
+   );
+};
+
 export default Nav;

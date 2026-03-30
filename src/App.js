@@ -1,44 +1,74 @@
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import Landing from './views/Landing';
-import Home from './views/Home';
-import About from './views/About';
+import React, { useState, useEffect } from 'react';
+import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import Home from './views/Home/Home.jsx';
+import About from './views/About/About.jsx';
+import Detail from './views/Detail/Detail.jsx';
+import Form from './components/Form/Form.jsx';
 import Nav from './components/Nav/Nav.jsx';
-import { useState } from 'react';
-import Detail from './views/Detail';
+import './App.css';
 
 function App() {
+   const { pathname } = useLocation();
+   const navigate = useNavigate();
    const [characters, setCharacters] = useState([]);
 
+   // --- ESTADOS DE SEGURIDAD (EJERCICIO 5) ---
+   const [access, setAccess] = useState(false);
+   const EMAIL = 'dpina5596@gmail.com'; 
+   const PASSWORD = 'TuPasswor1';   
+
+   // --- LÓGICA DE ACCESO (EJERCICIO 6) ---
+   function login(userData) {
+      if (userData.email === EMAIL && userData.password === PASSWORD) {
+         setAccess(true);
+         navigate('/home');
+      } else {
+         alert("CREDENCIALES INVÁLIDAS: Acceso denegado.");
+      }
+   }
+
+   // --- EJERCICIO EXTRA: FUNCIÓN LOGOUT ---
+   function logout() {
+      setAccess(false);
+      navigate('/'); 
+   }
+
+   // --- PROTECCIÓN DE RUTAS (EJERCICIO 5) ---
+   useEffect(() => {
+      !access && navigate('/');
+   }, [access, navigate]);
+
+   // --- LÓGICA DE PERSONAJES ---
    function onSearch(id) {
       fetch(`https://rickandmortyapi.com/api/character/${id}`)
-         .then(response => response.json())
+         .then(res => res.json())
          .then(data => {
             if (data.name) {
                const exists = characters.find(c => c.id === data.id);
-               if(exists) return alert("Ese personaje ya existe");
-               setCharacters((oldChars) => [...oldChars, data]);
+               if (exists) return alert("Entidad ya registrada.");
+               setCharacters((old) => [...old, data]);
             } else {
-               window.alert('¡No hay personajes con este ID!');
+               alert("ID no encontrado.");
             }
          });
    }
 
    const onClose = (id) => {
-      const filtered = characters.filter((char) => char.id !== Number(id));
-      setCharacters(filtered);
+      setCharacters(characters.filter(char => char.id !== Number(id)));
    };
 
    return (
-        <div className="App">
-      <Nav onSearch = {onSearch} />
-      <Routes>
-        <Route path='/' element={<Landing />} />
-        <Route path='/home' element={<Home characters={characters} onClose={onClose} />}  />
-        <Route path='/about' element={<About />} />
-        <Route path='/detail/:id' element={<Detail />} />
-      </Routes>1
-    </div>
+      <div className="App">
+         {/* Se muestra Nav solo si no estamos en el login y pasamos logout */}
+         {pathname !== '/' && <Nav onSearch={onSearch} logout={logout} />}
+         
+         <Routes>
+            <Route path='/' element={<Form login={login} />} />
+            <Route path='/home' element={<Home characters={characters} onClose={onClose} />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/detail/:id' element={<Detail />} />
+         </Routes>
+      </div>
    );
 }
 

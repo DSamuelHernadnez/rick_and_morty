@@ -1,0 +1,72 @@
+.navContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: #0a0a0b;
+    border-bottom: 2px solid #00f2ff;
+    box-shadow: 0 5px 20px rgba(0, 242, 255, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    animation: neonPulse 8s infinite alternate;
+}
+
+.linksGroup {
+    display: flex;
+    gap: 15px;
+}
+
+/* --- Botones Estilo Ciberpunk --- */
+.navBtn, .logoutBtn {
+    background: transparent;
+    padding: 8px 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    clip-path: polygon(15% 0%, 100% 0%, 100% 70%, 85% 100%, 0% 100%, 0% 30%);
+}
+
+.navBtn {
+    color: #00f2ff;
+    border: 1px solid #00f2ff;
+}
+
+.logoutBtn {
+    color: #ff003c;
+    border: 1px solid #ff003c;
+    margin-left: 10px;
+}
+
+.navBtn:hover {
+    background: rgba(0, 242, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.logoutBtn:hover {
+    background: rgba(255, 0, 60, 0.1);
+    box-shadow: 0 0 15px rgba(255, 0, 60, 0.5);
+}
+
+/* --- Estado Activo --- */
+.activeLink .navBtn {
+    background: #00f2ff;
+    color: #0a0a0b;
+    box-shadow: 0 0 20px #00f2ff;
+}
+
+.searchWrapper {
+    display: flex;
+    align-items: center;
+    border-right: 3px solid #ff003c;
+    padding-right: 20px;
+}
+
+@keyframes neonPulse {
+    0% { border-bottom-color: #00f2ff; box-shadow: 0 5px 15px rgba(0, 242, 255, 0.2); }
+    50% { border-bottom-color: #ff003c; box-shadow: 0 5px 15px rgba(255, 0, 60, 0.2); }
+    100% { border-bottom-color: #00f2ff; box-shadow: 0 5px 15px rgba(0, 242, 255, 0.2); }
+}
