@@ -1,107 +1,189 @@
-aboutContainer {
+.aboutContainer {
+    background-color: #0d0d10;
+    background-image: 
+        linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-attachment: fixed;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh;
-    padding: 20px;
-    background-color: #0d0d10;
+    padding: 40px  20px;
+    position: relative;
+    overflow-x: hidden;
+    font-family: 'Courier New', Courier, monospace;
 }
 
+/* Efecto Viñeta del Home */
+.aboutContainer::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, transparent 20%, rgba(13, 13, 16, 0.9) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Líneas de escaneo del Home */
+.scanline {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(rgba(18, 18, 18, 0) 50%, rgba(0, 0, 0, 0.15) 50%);
+    background-size: 100% 4px;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.1;
+}
+
+/* --- LA TARJETA --- */
 .profileCard {
-    background: #0a0a0b;
+    background: rgba(10, 10, 11, 0.95);
+    border: 2px solid #00f2ff;
     width: 100%;
     max-width: 700px;
-    border: 1px solid #333;
+    padding: 35px;
     position: relative;
-    padding: 40px;
-    /* Corte diagonal en la esquina superior derecha */
-    clip-path: polygon(0% 0%, 90% 0%, 100% 10%, 100% 100%, 0% 100%);
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-    border-left: 4px solid #00f2ff; /* Acento Azul Eléctrico */
+    z-index: 5;
+    box-shadow: 0 0 30px rgba(0, 242, 255, 0.1);
+    clip-path: polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%);
+    animation: fadeIn 0.8s ease-out;
 }
 
 .header {
     display: flex;
     align-items: center;
-    gap: 30px;
-    margin-bottom: 40px;
+    gap: 25px;
+    border-bottom: 2px solid #ff003c;
+    padding-bottom: 20px;
+    margin-bottom: 25px;
 }
 
-.avatarPlaceholder {
-    width: 100px;
-    height: 100px;
-    background: #1a1a1d;
-    border: 2px solid #ff003c; /* Rojo Láser */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
+/* Avatar Hexagonal */
+.avatarWrapper {
+    width: 130px;
+    height: 130px;
+    position: relative;
+    border: 3px solid #00f2ff;
+    background: #000;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.profileImg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) contrast(120%);
+    transition: 0.4s;
+}
+
+.profileCard:hover .profileImg {
+    filter: grayscale(0%) contrast(100%);
+}
+
+/* Texto de Identidad */
+.userName {
     font-size: 2rem;
-    color: #ff003c;
-    text-shadow: 0 0 10px #ff003c;
-    box-shadow: inset 0 0 15px rgba(255, 0, 60, 0.2);
-}
-
-.titleGroup h1 {
     margin: 0;
-    font-size: 2.2rem;
+    color: #fff;
     letter-spacing: 3px;
-    color: #e0e0e0;
 }
 
 .role {
-    color: #00f2ff;
-    font-size: 0.9rem;
-    letter-spacing: 2px;
+    color: #f0db4f; /* Dorado Growth Partner */
+    margin: 5px 0 10px 0;
     font-weight: bold;
-    margin-top: 5px;
 }
 
+.statusIndicator {
+    font-size: 0.8rem;
+    color: #00f2ff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.statusDot {
+    width: 8px;
+    height: 8px;
+    background-color: #0f0;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #0f0;
+    animation: pulse 1.5s infinite;
+}
+
+/* Secciones de Información */
 .sectionTitle {
     color: #ff003c;
-    font-size: 0.8rem;
     letter-spacing: 2px;
-    margin-bottom: 10px;
-}
-
-.content p {
-    color: #b0b0b0;
-    line-height: 1.6;
+    margin-bottom: 12px;
     font-size: 1.1rem;
 }
 
-.brand {
-    color: #fff;
-    font-weight: bold;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-decoration-color: #00f2ff;
+.missionText {
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
 }
 
+.brand {
+    color: #f0db4f;
+    font-weight: bold;
+}
+
+/* Skills Grid */
 .techStack {
     display: flex;
+    gap: 12px;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 30px;
 }
 
 .skill {
     background: rgba(0, 242, 255, 0.1);
-    color: #00f2ff;
-    padding: 5px 15px;
-    font-size: 0.75rem;
-    font-weight: bold;
     border: 1px solid #00f2ff;
-    letter-spacing: 1px;
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    color: #00f2ff;
+    transition: 0.3s;
 }
 
+.skill:hover {
+    background: #00f2ff;
+    color: #0a0a0b;
+    box-shadow: 0 0 15px #00f2ff;
+}
+
+/* Footer y Detalles */
 .footer {
-    margin-top: 40px;
-    border-top: 1px solid #222;
+    margin-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 15px;
     display: flex;
     justify-content: space-between;
     font-size: 0.7rem;
-    color: #555;
-    font-family: monospace;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+.securityTag { color: #ff003c; font-weight: bold; }
+
+.cornerDecor {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    border-right: 3px solid #f0db4f;
+    border-bottom: 3px solid #f0db4f;
+    opacity: 0.5;
+}
+
+/* ANIMACIONES */
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }

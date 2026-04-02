@@ -1,0 +1,43 @@
+.errorContainer {
+    background-color: #0d0d10;
+    background-image: 
+        linear-gradient(rgba(255, 0, 60, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 0, 60, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+    
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color: #ff003c; 
+}
+
+.errorCode {
+    font-size: 8rem;
+    font-weight: bold;
+    margin: 0;
+    text-shadow: 3px 3px 0px #00f2ff; 
+    animation: glitch 1s infinite alternate;
+}
+
+.errorMsg {
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    background: rgba(255, 0, 60, 0.1);
+    padding: 10px 20px;
+    border: 1px solid #ff003c;
+    clip-path: polygon(5% 0%, 100% 0%, 90% 100%, 0% 100%);
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); text-shadow: -3px -3px 0px #00f2ff; }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+    100% { transform: translate(0); }
+}

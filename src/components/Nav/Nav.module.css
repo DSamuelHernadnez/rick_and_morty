@@ -18,7 +18,8 @@
 }
 
 /* --- Botones Estilo Ciberpunk --- */
-.navBtn, .logoutBtn {
+.navBtn,
+.logoutBtn {
     background: transparent;
     padding: 8px 25px;
     font-weight: bold;
@@ -66,7 +67,108 @@
 }
 
 @keyframes neonPulse {
-    0% { border-bottom-color: #00f2ff; box-shadow: 0 5px 15px rgba(0, 242, 255, 0.2); }
-    50% { border-bottom-color: #ff003c; box-shadow: 0 5px 15px rgba(255, 0, 60, 0.2); }
-    100% { border-bottom-color: #00f2ff; box-shadow: 0 5px 15px rgba(0, 242, 255, 0.2); }
+    0% {
+        border-bottom-color: #00f2ff;
+        box-shadow: 0 5px 15px rgba(0, 242, 255, 0.2);
+    }
+
+    50% {
+        border-bottom-color: #ff003c;
+        box-shadow: 0 5px 15px rgba(255, 0, 60, 0.2);
+    }
+
+    100% {
+        border-bottom-color: #00f2ff;
+        box-shadow: 0 5px 15px rgba(0, 242, 255, 0.2);
+    }
+}
+
+.navBtn,
+.logoutBtn,
+.randomBtn {
+    background: transparent;
+    padding: 8px 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    /* Mismo corte geométrico para todos */
+    clip-path: polygon(15% 0%, 100% 0%, 100% 70%, 85% 100%, 0% 100%, 0% 30%);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* Ajuste para dispositivos móviles */
+@media (max-width: 768px) {
+    .navContainer {
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .searchWrapper {
+        border-right: none;
+        border-bottom: 3px solid #ff003c;
+        padding-bottom: 10px;
+        padding-right: 0;
+    }
+}
+
+/* 2. ADD_RANDOM (Amarillo Eléctrico / "Warning" Style) */
+.randomBtn {
+    color: #00f2ff;
+    border: 1px solid #00f2ff;
+}
+
+.randomBtn:hover {
+    background: rgba(0, 242, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+    transform: scale(1.05);
+}
+
+.navBtn,
+.logoutBtn,
+.randomBtn,
+.tenRandomBtn {
+    background: transparent;
+    padding: 8px 25px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    clip-path: polygon(15% 0%, 100% 0%, 100% 70%, 85% 100%, 0% 100%, 0% 30%);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+/* 1. RANDOM (Cyan) */
+.randomBtn {
+    color: #00f2ff;
+    border: 1px solid #00f2ff;
+}
+
+.randomBtn:hover {
+    background: rgba(0, 242, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+    transform: scale(1.05);
+}
+
+/* 2. TEN_RANDOM (Dorado/Amarillo Eléctrico) */
+.tenRandomBtn {
+    color: #00f2ff;
+    border: 1px solid #00f2ff;
+}
+
+.tenRandomBtn:hover {
+    background: rgba(0, 242, 255, 0.1);
+    box-shadow: 0 0 15px rgba(0, 242, 255, 0.5);
+    transform: scale(1.05);
+}
+
+/* Ajuste adicional para el contenedor de links */
+.linksGroup {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    /* Para que no se rompa en pantallas medianas */
 }
